@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
+    'react-native/react-native': true,
   },
   extends: [
     'plugin:react/recommended',
@@ -17,6 +18,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    'react-native',
   ],
   rules: {
     // Don't enforce control flow closing curly brace needs to be
