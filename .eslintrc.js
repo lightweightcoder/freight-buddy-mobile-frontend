@@ -45,5 +45,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     // allow us to use variables and functions before defining them
     'no-use-before-define': 'off',
+    'react/prop-types': 'off',
+    'react/style-prop-object': 'off',
   },
 };
