@@ -1,4 +1,3 @@
-/* eslint-disable react/style-prop-object */
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
@@ -8,6 +7,7 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
+import styles from './styles.js';
 
 // for heroku
 const BACKEND_URL = 'https://freight-buddy-mobile-backend.herokuapp.com';
@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.container}>
       <Text>Home Screen</Text>
       <Button
         title="Go to Details"
@@ -48,12 +48,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
