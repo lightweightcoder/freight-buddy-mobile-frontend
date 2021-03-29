@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import {
   View, TextInput, Text, Button,
 } from 'react-native';
-import styles from '../styles.js';
+import styles from '../../styles.js';
 
-export default function FavoursScreen({ navigation }) {
+export default function CreateRequestScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>Favours Screen</Text>
+      <Text>Create Request Screen</Text>
     </View>
   );
 }

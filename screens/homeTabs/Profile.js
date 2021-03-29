@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import {
   View, TextInput, Text, Button,
 } from 'react-native';
-import styles from '../styles.js';
+import styles from '../../styles.js';
 
-export default function FeedScreen({ navigation }) {
+export default function ProfileScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>Feed Screen</Text>
+      <Text>Profile Screen</Text>
     </View>
   );
 }

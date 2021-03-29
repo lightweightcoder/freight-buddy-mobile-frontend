@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import {
   View, TextInput, Text, Button,
 } from 'react-native';
-import styles from '../styles.js';
+import styles from '../../styles.js';
 
-export default function CreateRequestScreen({ navigation }) {
+export default function FeedScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>Create Request Screen</Text>
+      <Text>Feed Screen</Text>
     </View>
   );
 }

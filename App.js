@@ -6,8 +6,6 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BACKEND_URL, USER_AUTH } from './store.js';
@@ -15,81 +13,12 @@ import styles from './styles.js';
 
 // import the screens
 import LoginScreen from './screens/Login.js';
-import FeedScreen from './screens/Feed.js';
-import RequestsScreen from './screens/Requests.js';
-import CreateRequestScreen from './screens/CreateRequest.js';
-import FavoursScreen from './screens/Favours.js';
-import ProfileScreen from './screens/Profile.js';
+import HomeTabs from './screens/HomeTabs.js';
 
 axios.defaults.withCredentials = true;
 
 // get the stack nagivator object used for configuring navigation between screens
 const Stack = createStackNavigator();
-
-// get the bottom tab navigator
-const Tab = createMaterialBottomTabNavigator();
-
-// screens that display the bottom tab bar are placed here
-function HomeTabs() {
-  return (
-    <Tab.Navigator
-      initialRouteName="Feed"
-      activeColor="#9ede73"
-      barStyle={{ backgroundColor: '#e48900' }}
-    >
-      <Tab.Screen
-        name="Feed"
-        component={FeedScreen}
-        options={{
-          tabBarLabel: 'Feed',
-          tabBarIcon: ({ color }) => (
-            <Icon name="home" size={22} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Requests"
-        component={RequestsScreen}
-        options={{
-          tabBarLabel: 'Requests',
-          tabBarIcon: ({ color }) => (
-            <Icon name="question-circle" size={22} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Create"
-        component={CreateRequestScreen}
-        options={{
-          tabBarLabel: 'Create',
-          tabBarIcon: ({ color }) => (
-            <Icon name="plus-circle" size={22} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Favours"
-        component={FavoursScreen}
-        options={{
-          tabBarLabel: 'Favours',
-          tabBarIcon: ({ color }) => (
-            <Icon name="hands-helping" size={22} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          tabBarLabel: 'Profile',
-          tabBarIcon: ({ color }) => (
-            <Icon name="user" size={22} color={color} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  );
-}
 
 export default function App() {
   const [initialRoute, setInitialRoute] = useState('Login');
