@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View, TextInput, Text, Button,
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { BACKEND_URL, USER_AUTH } from '../store.js';
+import {
+  BACKEND_URL, USER_AUTH, AppContext, retrieveRequests,
+} from '../store.js';
 import styles from '../styles.js';
 
 export default function LoginScreen({ navigation }) {
+  // retrieve the dispatch function from the App Context provider
+  const { dispatch } = useContext(AppContext);
+
   // declaring state variables
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,13 +38,25 @@ export default function LoginScreen({ navigation }) {
           const authData = {
             userId: result.data.userId,
             loggedInHash: result.data.loggedInHash,
+            userCountry: result.data.userCountry,
           };
 
           // update async storage
           AsyncStorage.setItem(USER_AUTH, JSON.stringify(authData));
 
-          // direct user to home screen
-          navigation.navigate('Home');
+          // From database, retrieve exsisting requests made to the user's country
+          // and set it in the app provider's state
+          const retrieveRequestsResult = retrieveRequests(dispatch, result.data.userCountry);
+
+          retrieveRequestsResult.then((retrievedResult) => {
+            if (retrievedResult.error) {
+              // if there is an error, display a message to inform user
+              setInvalidMessage('sorry a database error occurred. We are currently resolving the issue.');
+            } else {
+              // if there is no error, direct user to home screen
+              navigation.navigate('Home');
+            }
+          });
         }
       }).catch((error) => {
         console.log('login error', error);
@@ -58,13 +75,25 @@ export default function LoginScreen({ navigation }) {
           const authData = {
             userId: result.data.userId,
             loggedInHash: result.data.loggedInHash,
+            userCountry: result.data.userCountry,
           };
 
           // update async storage
           AsyncStorage.setItem(USER_AUTH, JSON.stringify(authData));
 
-          // direct demo user to home screen
-          navigation.navigate('Home');
+          // From database, retrieve exsisting requests made to the user's country
+          // and set it in the app provider's state
+          const retrieveRequestsResult = retrieveRequests(dispatch, result.data.userCountry);
+
+          retrieveRequestsResult.then((retrievedResult) => {
+            if (retrievedResult.error) {
+              // if there is an error, display a message to inform user
+              setInvalidMessage('sorry a database error occurred. We are currently resolving the issue.');
+            } else {
+              // if there is no error, direct user to home screen
+              navigation.navigate('Home');
+            }
+          });
         } else {
           // if login was not successful, let user know
           setInvalidMessage('Sorry something went wrong. Please trying logging in/registering.');
