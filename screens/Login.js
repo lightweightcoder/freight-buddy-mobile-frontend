@@ -17,30 +17,64 @@ export default function LoginScreen({ navigation }) {
   // run this function when login button is clicked
   const handleLogin = () => {
     // post request to axios backend
-    axios.post(`${BACKEND_URL}/login`, { email, password }, { withCredentials: true }).then((result) => {
-      console.log(result.data, 'result.data');
+    axios.post(`${BACKEND_URL}/login`, { email, password }, { withCredentials: true })
+      .then((result) => {
+        console.log(result.data, 'result.data');
 
-      // if validation failed for login, display validation message
-      if (result.data.invalidMessage) {
-        console.log('invalid login found');
-        setInvalidMessage(result.data.invalidMessage);
-      }
+        // if validation failed for login, display validation message
+        if (result.data.invalidMessage) {
+          console.log('invalid login found');
+          setInvalidMessage(result.data.invalidMessage);
+        }
 
-      // if user logged in successfully,
-      if (result.data.userId) {
+        // if user logged in successfully,
+        if (result.data.userId) {
         // set the user id and hashed logged in user id in the async storage
-        const authData = {
-          userId: result.data.userId,
-          loggedInHash: result.data.loggedInHash,
-        };
+          const authData = {
+            userId: result.data.userId,
+            loggedInHash: result.data.loggedInHash,
+          };
 
-        // update async storage
-        AsyncStorage.setItem(USER_AUTH, JSON.stringify(authData));
+          // update async storage
+          AsyncStorage.setItem(USER_AUTH, JSON.stringify(authData));
 
-        // direct user to home screen
-        navigation.navigate('Home');
-      }
-    }); };
+          // direct user to home screen
+          navigation.navigate('Home');
+        }
+      }).catch((error) => {
+        console.log('login error', error);
+      });
+  };
+
+  const handleDemoLogin = () => {
+    // get request to axios backend to login as demo user
+    axios.get(`${BACKEND_URL}/demo-login`)
+      .then((result) => {
+        console.log(result.data, 'result.data');
+
+        // if demo user logged in successfully,
+        if (result.data.loginSuccess) {
+          // set the user id and hashed logged in user id in the async storage
+          const authData = {
+            userId: result.data.userId,
+            loggedInHash: result.data.loggedInHash,
+          };
+
+          // update async storage
+          AsyncStorage.setItem(USER_AUTH, JSON.stringify(authData));
+
+          // direct demo user to home screen
+          navigation.navigate('Home');
+        } else {
+          // if login was not successful, let user know
+          setInvalidMessage('Sorry something went wrong. Please trying logging in/registering.');
+        }
+      }).catch((error) => {
+        console.log('demo login error', error);
+        // if login was not successful, let user know
+        setInvalidMessage('Sorry something went wrong. Please trying logging in/registering.');
+      });
+  };
 
   const onEmailChange = (changedEmail) => {
     setEmail(changedEmail);
@@ -91,6 +125,13 @@ export default function LoginScreen({ navigation }) {
           onPress={handleLogin}
           title="Login"
           color="#7cfc00"
+        />
+      </View>
+      <View style={styles.demoLoginButton}>
+        <Button
+          onPress={handleDemoLogin}
+          title="Demo Login"
+          color="grey"
         />
       </View>
     </View>
