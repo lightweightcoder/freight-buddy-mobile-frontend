@@ -17,7 +17,7 @@ export default function HomeTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
-      activeColor="#9ede73"
+      activeColor="#864000"
       barStyle={{ backgroundColor: '#e48900' }}
     >
       <Tab.Screen
@@ -34,7 +34,7 @@ export default function HomeTabs() {
         name="Requests"
         component={RequestsScreen}
         options={{
-          tabBarLabel: 'Requests',
+          tabBarLabel: 'My Requests',
           tabBarIcon: ({ color }) => (
             <Icon name="question-circle" size={22} color={color} />
           ),
@@ -54,7 +54,7 @@ export default function HomeTabs() {
         name="Favours"
         component={FavoursScreen}
         options={{
-          tabBarLabel: 'Favours',
+          tabBarLabel: 'My Favours',
           tabBarIcon: ({ color }) => (
             <Icon name="hands-helping" size={22} color={color} />
           ),

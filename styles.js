@@ -4,12 +4,16 @@ let styles;
 
 // eslint-disable-next-line no-unused-vars
 export default styles = StyleSheet.create({
-  // for app component
+  // general
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  scrollView: {
+    backgroundColor: '#ffefcf',
   },
 
   // for login screen
@@ -36,5 +40,16 @@ export default styles = StyleSheet.create({
 
   logoutButton: {
 
+  },
+
+  requestCardContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    padding: 10,
+    backgroundColor: '#ff7a00',
   },
 });
