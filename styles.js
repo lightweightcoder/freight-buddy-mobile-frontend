@@ -28,4 +28,8 @@ export default styles = StyleSheet.create({
   loginButton: {
     width: '40%',
   },
+
+  logoutButton: {
+
+  },
 });

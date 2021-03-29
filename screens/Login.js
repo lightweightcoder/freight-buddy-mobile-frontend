@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { BACKEND_URL, USER_AUTH } from '../store.js';
 import styles from '../styles.js';
 
@@ -51,22 +52,40 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Text h3>Freight Buddy Login</Text>
       <Text style={styles.invalidMessage}>{invalidMessage}</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={onEmailChange}
-        value={email}
-        placeholder="email"
-        textContentType="emailAddress"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={onPasswordChange}
-        value={password}
-        placeholder="password"
-        textContentType="password"
-        secureTextEntry
-      />
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: -15,
+      }}
+      >
+        <Icon name="envelope" size={22} color="#c2c0bc" />
+        <TextInput
+          style={styles.input}
+          onChangeText={onEmailChange}
+          value={email}
+          placeholder="email"
+          textContentType="emailAddress"
+        />
+      </View>
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: -15,
+      }}
+      >
+        <Icon name="key" size={22} color="#c2c0bc" />
+        <TextInput
+          style={styles.input}
+          onChangeText={onPasswordChange}
+          value={password}
+          placeholder="password"
+          textContentType="password"
+          secureTextEntry
+        />
+      </View>
+
       <View style={styles.loginButton}>
         <Button
           onPress={handleLogin}
