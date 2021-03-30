@@ -20,10 +20,9 @@ export default function RequestCard({ request, setModalVisible }) {
   };
 
   return (
-    <View style={styles.requestCardContainer}>
+    <View style={localStyles.requestCardContainer}>
       <Pressable
         onPress={handleRequestCardClick}
-        style={styles.requestCardPressableContainer}
       >
         <Text style={localStyles.text}>
           {`Product: ${request.productName}`}
@@ -42,5 +41,16 @@ export default function RequestCard({ request, setModalVisible }) {
 const localStyles = StyleSheet.create({
   text: {
     fontSize: 14,
+  },
+
+  requestCardContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    padding: 10,
+    backgroundColor: '#ff7a00',
   },
 });

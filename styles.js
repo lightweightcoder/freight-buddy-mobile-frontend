@@ -41,15 +41,4 @@ export default styles = StyleSheet.create({
   logoutButton: {
 
   },
-
-  requestCardContainer: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    borderWidth: 1,
-    borderRadius: 10,
-    marginHorizontal: 10,
-    marginVertical: 5,
-    padding: 10,
-    backgroundColor: '#ff7a00',
-  },
 });
