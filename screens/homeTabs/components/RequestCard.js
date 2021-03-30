@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Pressable, StyleSheet, Text, View,
 } from 'react-native';
 import styles from '../../../styles.js';
+import { AppContext, setSelectedRequestAction } from '../../../store.js';
 
-export default function RequestCard({ request }) {
-  // handler for clicking on a request card
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   // set a selected request id, then set the state of the page to
-  //   // to display the request details in helper view
-  //   selectAndViewARequestPageHelper(id);
-  // };
+export default function RequestCard({ request, setModalVisible }) {
+  // retrieve the dispatch function from the App Context provider
+  const { dispatch } = useContext(AppContext);
+
+  // handler for clicking on a request
+  const handleRequestCardClick = () => {
+    console.log('clicked');
+    // set the selected request in the store state variable of App provider
+    dispatch(setSelectedRequestAction(request));
+
+    // show the modal that displays a request's details
+    setModalVisible(true);
+  };
 
   return (
     <View style={styles.requestCardContainer}>
       <Pressable
-        onPress={() => {
-          // display a request details
-        }}
+        onPress={handleRequestCardClick}
         style={styles.requestCardPressableContainer}
       >
         <Text style={localStyles.text}>

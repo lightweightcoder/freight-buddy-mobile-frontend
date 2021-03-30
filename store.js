@@ -1,9 +1,8 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 
-// eslint-disable-next-line import/prefer-default-export
-// export const BACKEND_URL = 'https://freight-buddy-mobile-backend.herokuapp.com';
-export const BACKEND_URL = 'http://localhost:3004';
+// export const BACKEND_URL = 'http://localhost:3004';
+export const BACKEND_URL = 'https://freight-buddy-mobile-backend.herokuapp.com';
 // key for async storage to store a user's authentication details
 export const USER_AUTH = 'USER_AUTH';
 
@@ -15,12 +14,15 @@ export const initialState = {
 
 // define each reducer action type we want to do on the data we defined above
 const RETRIEVE_REQUESTS = 'RETRIEVE_REQUESTS';
+const SET_REQUEST = 'SET_REQUEST';
 
 // define the matching reducer function
 export function appReducer(state, action) {
   switch (action.type) {
     case RETRIEVE_REQUESTS:
       return { ...state, requests: action.payload.requests };
+    case SET_REQUEST:
+      return { ...state, selectedRequest: action.payload.request };
     default:
       return state;
   }
@@ -32,6 +34,15 @@ export function retrieveRequestsAction(requests) {
     type: RETRIEVE_REQUESTS,
     payload: {
       requests,
+    },
+  };
+}
+
+export function setSelectedRequestAction(request) {
+  return {
+    type: SET_REQUEST,
+    payload: {
+      request,
     },
   };
 }

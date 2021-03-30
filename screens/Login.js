@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import {
-  View, TextInput, Text, Button,
+  View, TextInput, Text, Button, StyleSheet,
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -115,7 +115,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text h3>Freight Buddy Login</Text>
+      <Text style={localStyles.loginHeadingText}>Freight Buddy Login</Text>
       <Text style={styles.invalidMessage}>{invalidMessage}</Text>
       <View style={{
         flexDirection: 'row',
@@ -166,3 +166,9 @@ export default function LoginScreen({ navigation }) {
     </View>
   );
 }
+
+const localStyles = StyleSheet.create({
+  loginHeadingText: {
+    fontSize: 22,
+  },
+});
