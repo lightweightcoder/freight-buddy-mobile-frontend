@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import {
   Pressable, StyleSheet, Text, View,
 } from 'react-native';
-import styles from '../../../styles.js';
 import { AppContext, setSelectedRequestAction } from '../../../store.js';
 
 export default function UserRequestCard({ request, setModalVisible }) {
@@ -11,7 +10,6 @@ export default function UserRequestCard({ request, setModalVisible }) {
 
   // handler for clicking on a request
   const handleRequestCardClick = () => {
-    console.log('clicked');
     // set the selected request in the store state variable of App provider
     dispatch(setSelectedRequestAction(request));
 

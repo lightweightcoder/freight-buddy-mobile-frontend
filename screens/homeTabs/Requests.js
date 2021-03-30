@@ -8,6 +8,7 @@ import {
   USER_AUTH, AppContext, retrieveUserRequests,
 } from '../../store.js';
 import UserRequestCard from './components/UserRequestCard.js';
+import UserRequestModal from './components/UserRequestModal.js';
 
 export default function RequestsScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +17,9 @@ export default function RequestsScreen({ navigation }) {
 
   // get the user's requests
   const { userRequests } = store;
+
+  // state to determine if modal should be displayed
+  const [modalVisible, setModalVisible] = useState(false);
 
   // get the user's requests on the 1st time the component renders
   useEffect(() => {
@@ -60,14 +64,14 @@ export default function RequestsScreen({ navigation }) {
     );
   }
 
-  console.log('store.userRequests', store.userRequests);
   // return the display of the user's requests
   return (
     <ScrollView style={styles.scrollView}>
       <Text style={localStyles.heading}>My Requests</Text>
       {userRequests.map((request) => (
-        <UserRequestCard key={request.id} request={request} />
+        <UserRequestCard key={request.id} request={request} setModalVisible={setModalVisible} />
       ))}
+      <UserRequestModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </ScrollView>
   );
 }

@@ -17,7 +17,7 @@ export default function FeedScreen() {
   // get the requests from the store
   const { requests } = store;
 
-  // state to determine is modal should be displayed
+  // state to determine if modal should be displayed
   const [modalVisible, setModalVisible] = useState(false);
 
   // if there are no requests made to the user's country yet

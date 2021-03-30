@@ -38,6 +38,7 @@ export default function RequestModal({ modalVisible, setModalVisible }) {
           </Pressable>
           <View style={localStyles.modalContentView}>
             <Text style={localStyles.modalText}>{`Product: ${selectedRequest.productName}`}</Text>
+            <Text style={localStyles.modalText}>{`Origin: ${selectedRequest.country}`}</Text>
             <Text style={localStyles.modalText}>{`Description: ${selectedRequest.description}`}</Text>
             <Text style={localStyles.modalText}>{`Offer Price: ${selectedRequest.price}`}</Text>
             <Text style={localStyles.modalText}>{`Delivery Addr: ${selectedRequest.shippingAddress}`}</Text>

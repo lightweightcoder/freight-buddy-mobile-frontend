@@ -1,8 +1,8 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 
-export const BACKEND_URL = 'http://localhost:3004';
-// export const BACKEND_URL = 'https://freight-buddy-mobile-backend.herokuapp.com';
+// export const BACKEND_URL = 'http://localhost:3004';
+export const BACKEND_URL = 'https://freight-buddy-mobile-backend.herokuapp.com';
 // key for async storage to store a user's authentication details
 export const USER_AUTH = 'USER_AUTH';
 
@@ -17,6 +17,7 @@ export const initialState = {
 const RETRIEVE_REQUESTS = 'RETRIEVE_REQUESTS';
 const SET_REQUEST = 'SET_REQUEST';
 const RETRIEVE_USER_REQUESTS = 'RETRIEVE_USER_REQUESTS';
+const UPDATE_ALL_FIELDS = 'UPDATE_ALL_FIELDS';
 
 // define the matching reducer function
 export function appReducer(state, action) {
@@ -27,6 +28,11 @@ export function appReducer(state, action) {
       return { ...state, selectedRequest: action.payload.request };
     case RETRIEVE_USER_REQUESTS:
       return { ...state, userRequests: action.payload.userRequests };
+    case UPDATE_ALL_FIELDS:
+      return {
+        // eslint-disable-next-line max-len
+        ...state, requests: action.payload.requests, selectedRequest: action.payload.selectedRequest, userRequests: action.payload.userRequests,
+      };
     default:
       return state;
   }
@@ -56,6 +62,17 @@ export function retrieveUserRequestsAction(userRequests) {
     type: RETRIEVE_USER_REQUESTS,
     payload: {
       userRequests,
+    },
+  };
+}
+
+export function updateAllFieldsAction(data) {
+  return {
+    type: UPDATE_ALL_FIELDS,
+    payload: {
+      userRequests: data.userRequests,
+      requests: data.requestsList,
+      selectedRequest: data.updatedSelectedRequest,
     },
   };
 }
@@ -127,6 +144,21 @@ export async function retrieveUserRequests(dispatch, userId) {
         console.log('forbidden error');
         return { error: true };
       }
+      console.log(error);
+      return { error: true };
+    });
+}
+
+// update a user's request status in the database
+export async function updateUserRequestStatus(dispatch, requestId, newStatus, userId, userCountry) {
+  return axios.put(`${BACKEND_URL}/requests/${requestId}/status`, { newStatus, userId, userCountry })
+    .then((result) => {
+      // update the selected request, user's requests
+      // and all available requests made to the user's country in App provider's state
+      dispatch(updateAllFieldsAction(result.data));
+      return { error: false };
+    })
+    .catch((error) => {
       console.log(error);
       return { error: true };
     });
