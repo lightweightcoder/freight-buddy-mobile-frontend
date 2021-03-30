@@ -28,7 +28,6 @@ export default function RequestsScreen({ navigation }) {
 
         retrieveUserRequestsResult.then((retrievedResult) => {
           if (!(retrievedResult.error)) {
-            console.log(store.userRequests, 'store.userRequests');
             // set loading to false if there is no error in getting the user's requests
             setIsLoading(false);
           } else {
@@ -57,6 +56,7 @@ export default function RequestsScreen({ navigation }) {
     );
   }
 
+  // return the display of the user's requests
   return (
     <View style={styles.container}>
       <Text>Requests Screen</Text>

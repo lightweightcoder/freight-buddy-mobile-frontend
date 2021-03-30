@@ -70,7 +70,7 @@ export default function LoginScreen({ navigation }) {
         console.log(result.data, 'result.data');
 
         // if demo user logged in successfully,
-        if (result.data.loginSuccess) {
+        if (result.data.userId) {
           // set the user id and hashed logged in user id in the async storage
           const authData = {
             userId: result.data.userId,

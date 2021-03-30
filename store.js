@@ -26,7 +26,7 @@ export function appReducer(state, action) {
     case SET_REQUEST:
       return { ...state, selectedRequest: action.payload.request };
     case RETRIEVE_USER_REQUESTS:
-      return { ...state, userRequests: action.payload.requests };
+      return { ...state, userRequests: action.payload.userRequests };
     default:
       return state;
   }
@@ -51,11 +51,11 @@ export function setSelectedRequestAction(request) {
   };
 }
 
-export function retrieveUserRequestsAction(requests) {
+export function retrieveUserRequestsAction(userRequests) {
   return {
     type: RETRIEVE_USER_REQUESTS,
     payload: {
-      requests,
+      userRequests,
     },
   };
 }
@@ -119,7 +119,7 @@ export async function retrieveUserRequests(dispatch, userId) {
   return axios.get(`${BACKEND_URL}/users/${userId}/requests`)
     .then((result) => {
       // update the state in AppProvider with the user's requests
-      dispatch(retrieveUserRequestsAction(result.data.requestsList));
+      dispatch(retrieveUserRequestsAction(result.data.userRequests));
       return { error: false };
     })
     .catch((error) => {
