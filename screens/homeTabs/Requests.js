@@ -1,17 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {
-  View, TextInput, Text, Button,
+  View, Text, ScrollView, StyleSheet,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../../styles.js';
 import {
   USER_AUTH, AppContext, retrieveUserRequests,
 } from '../../store.js';
+import UserRequestCard from './components/UserRequestCard.js';
 
 export default function RequestsScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   // retrieve the store variable and dispatch function from the App Context provider
   const { store, dispatch } = useContext(AppContext);
+
+  // get the user's requests
+  const { userRequests } = store;
 
   // get the user's requests on the 1st time the component renders
   useEffect(() => {
@@ -56,10 +60,22 @@ export default function RequestsScreen({ navigation }) {
     );
   }
 
+  console.log('store.userRequests', store.userRequests);
   // return the display of the user's requests
   return (
-    <View style={styles.container}>
-      <Text>Requests Screen</Text>
-    </View>
+    <ScrollView style={styles.scrollView}>
+      <Text style={localStyles.heading}>My Requests</Text>
+      {userRequests.map((request) => (
+        <UserRequestCard key={request.id} request={request} />
+      ))}
+    </ScrollView>
   );
 }
+
+const localStyles = StyleSheet.create({
+  heading: {
+    fontSize: 22,
+    textAlign: 'center',
+    marginVertical: 10,
+  },
+});
