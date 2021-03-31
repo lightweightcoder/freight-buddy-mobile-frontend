@@ -1,14 +1,66 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View, TextInput, Text, Button, StyleSheet, ScrollView,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { Picker } from '@react-native-picker/picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { countriesNames, categoriesNames } from './utilities/createRequest.js';
+import { createRequest, AppContext, USER_AUTH } from '../../store.js';
 
 export default function CreateRequestScreen({ navigation }) {
+  // retrieve the dispatch function from the App Context provider
+  const { dispatch } = useContext(AppContext);
+
+  // state to inform user if a request is updating
+  const [isCreatingRequest, setIsCreatingRequest] = useState(false);
+
+  // initialise a form and get its methods
   const { handleSubmit, control, errors } = useForm();
-  const onSubmit = (data) => console.log(data, 'formdata');
+
+  // when user clicks on the form submit button
+  const onSubmit = (requestDetails) => {
+    console.log(requestDetails, 'formdata');
+
+    // try to get user authentication data from the phone's async storage
+    AsyncStorage.getItem(USER_AUTH).then((authData) => {
+      // parse the data. Null if no such item
+      const parsedAuthData = JSON.parse(authData);
+
+      // if there is a user authentication data set
+      if (parsedAuthData) {
+        // inform user that request is being created
+        setIsCreatingRequest(true);
+
+        const { userId } = parsedAuthData;
+
+        // create the request in the database
+        // and update all user's requests in store variable of App provider
+        createRequest(dispatch, userId, requestDetails)
+          .then(() => {
+            // remove the creating request message
+            setIsCreatingRequest(false);
+
+            // navigate user to requests screen
+            navigation.navigate('Requests');
+          });
+      } else {
+        // user is not logged in so navigate to login page
+        navigation.navigate('Login');
+      }
+    });
+  };
+
+  // if request if being created, inform the user
+  if (isCreatingRequest) {
+    return (
+      <ScrollView style={localStyles.scrollViewContainer}>
+        <View style={localStyles.viewContainer}>
+          <Text style={localStyles.heading}>Creating Request...</Text>
+        </View>
+      </ScrollView>
+    );
+  }
 
   return (
     <ScrollView style={localStyles.scrollViewContainer}>
@@ -54,7 +106,7 @@ export default function CreateRequestScreen({ navigation }) {
           <Controller
             control={control}
             defaultValue=""
-            render={({ onChange, onBlur, value }) => (
+            render={({ onChange, value }) => (
               <Picker
                 style={localStyles.itemPicker}
                 selectedValue={value}
@@ -76,7 +128,7 @@ export default function CreateRequestScreen({ navigation }) {
           <Controller
             control={control}
             defaultValue=""
-            render={({ onChange, onBlur, value }) => (
+            render={({ onChange, value }) => (
               <Picker
                 style={localStyles.itemPicker}
                 selectedValue={value}

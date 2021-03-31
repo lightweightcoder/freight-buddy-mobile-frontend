@@ -163,3 +163,18 @@ export async function updateUserRequestStatus(dispatch, requestId, newStatus, us
       return { error: true };
     });
 }
+
+// create a new request for the user in the database
+export async function createRequest(dispatch, userId, requestDetails) {
+  return axios.post(`${BACKEND_URL}/requests`, { userId, requestDetails })
+    .then((result) => {
+      console.log(result.data, 'result.data');
+      // update the user's requests in App provider's state
+      dispatch(retrieveUserRequestsAction(result.data.userRequests));
+      return { error: false };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { error: true };
+    });
+}

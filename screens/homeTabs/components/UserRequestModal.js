@@ -75,6 +75,9 @@ export default function UserRequestModal({ modalVisible, setModalVisible }) {
             // remove the message saying that the request is updating as it has finished updating
             setIsRequestUpdating(false);
           });
+      } else {
+        // user is not logged in so navigate to login page
+        navigation.navigate('Login');
       }
     });
   };
