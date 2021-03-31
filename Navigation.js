@@ -34,7 +34,6 @@ export default function Navigation() {
     AsyncStorage.getItem(USER_AUTH).then((authData) => {
       // parse the data. Null if no such item
       const parsedAuthData = JSON.parse(authData);
-      console.log(parsedAuthData, 'parsedAuthData');
 
       // if there is a user authentication data set
       if (parsedAuthData) {
