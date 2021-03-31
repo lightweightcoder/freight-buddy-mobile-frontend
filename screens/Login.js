@@ -24,8 +24,6 @@ export default function LoginScreen({ navigation }) {
     // post request to axios backend
     axios.post(`${BACKEND_URL}/login`, { email, password }, { withCredentials: true })
       .then((result) => {
-        console.log(result.data, 'result.data');
-
         // if validation failed for login, display validation message
         if (result.data.invalidMessage) {
           console.log('invalid login found');
@@ -67,8 +65,6 @@ export default function LoginScreen({ navigation }) {
     // get request to axios backend to login as demo user
     axios.get(`${BACKEND_URL}/demo-login`)
       .then((result) => {
-        console.log(result.data, 'result.data');
-
         // if demo user logged in successfully,
         if (result.data.userId) {
           // set the user id and hashed logged in user id in the async storage
