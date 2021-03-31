@@ -20,5 +20,5 @@ export function getUpdateRequestStatusButtonTextAndNewStatus(status) {
   }
 
   // no available action
-  return '';
+  return { text: '', newStatus: '' };
 }

@@ -104,9 +104,9 @@ export default function UserRequestModal({ modalVisible, setModalVisible }) {
             <Text style={localStyles.modalText}>{`Delivery Addr: ${selectedRequest.shippingAddress}`}</Text>
             <Text style={localStyles.linkText} onPress={handleReferenceLinkPress}>View product</Text>
             <Text style={localStyles.modalText}>{`Status: ${selectedRequest.status}`}</Text>
-            <Text style={localStyles.modalText}>Click below to update status.</Text>
             { (updateRequestStatusButtonText !== '') ? (
               <View>
+                <Text style={localStyles.modalText}>Click below to update status.</Text>
                 <Button
                   onPress={handleUpdateRequestStatusButtonPress}
                   title={updateRequestStatusButtonText}
