@@ -19,6 +19,6 @@ export function getUpdateRequestStatusButtonTextAndNewStatus(status) {
     return { text: 'I have received the item', newStatus: 'completed' };
   }
 
-  // no available action
+  // no available action.
   return { text: '', newStatus: '' };
 }
