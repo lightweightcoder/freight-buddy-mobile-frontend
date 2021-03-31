@@ -1,8 +1,8 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 
-export const BACKEND_URL = 'http://localhost:3004';
-// export const BACKEND_URL = 'https://freight-buddy-mobile-backend.herokuapp.com';
+// export const BACKEND_URL = 'http://localhost:3004';
+export const BACKEND_URL = 'https://freight-buddy-mobile-backend.herokuapp.com';
 // key for async storage to store a user's authentication details
 export const USER_AUTH = 'USER_AUTH';
 
