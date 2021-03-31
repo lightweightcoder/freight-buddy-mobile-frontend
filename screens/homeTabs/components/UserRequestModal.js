@@ -55,6 +55,30 @@ export default function UserRequestModal({ modalVisible, setModalVisible }) {
     });
   };
 
+  // handle to update the status of a request in the database to cancelled
+  const handleCancelRequestButtonPress = () => {
+    // inform user that request is updating
+    setIsRequestUpdating(true);
+
+    // try to get user authentication data from the phone's async storage
+    AsyncStorage.getItem(USER_AUTH).then((authData) => {
+      // parse the data. Null if no such item
+      const parsedAuthData = JSON.parse(authData);
+
+      // if there is a user authentication data set
+      if (parsedAuthData) {
+        const { userId, userCountry } = parsedAuthData;
+
+        // update the status in the database and update all the requests in store variable in the App provider
+        updateUserRequestStatus(dispatch, selectedRequest.id, 'cancelled', userId, userCountry)
+          .then(() => {
+            // remove the message saying that the request is updating as it has finished updating
+            setIsRequestUpdating(false);
+          });
+      }
+    });
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -90,8 +114,16 @@ export default function UserRequestModal({ modalVisible, setModalVisible }) {
                 />
               </View>
             ) : <View />}
+            { (selectedRequest.status !== 'completed' && selectedRequest.status !== 'cancelled') ? (
+              <View style={localStyles.cancelRequestButtonView}>
+                <Button
+                  onPress={handleCancelRequestButtonPress}
+                  title="Cancel request"
+                  color="grey"
+                />
+              </View>
+            ) : <View />}
             <Text style={localStyles.modalText}>{isRequestUpdating ? 'Updating request...' : ''}</Text>
-
           </View>
         </View>
       </View>
@@ -153,5 +185,8 @@ const localStyles = StyleSheet.create({
   },
   linkText: {
     color: 'blue',
+  },
+  cancelRequestButtonView: {
+    marginVertical: 10,
   },
 });
