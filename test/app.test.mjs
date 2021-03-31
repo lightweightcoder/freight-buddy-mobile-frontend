@@ -19,7 +19,7 @@ function getUpdateRequestStatusButtonTextAndNewStatus(status) {
   }
 
   // no available action
-  return '';
+  return { text: '', newStatus: '' };
 }
 
 describe('App', () => {
@@ -41,6 +41,12 @@ describe('App', () => {
         const result = getUpdateRequestStatusButtonTextAndNewStatus('shipped');
         expect(result.text).to.equal('I have received the item');
         expect(result.newStatus).to.equal('completed');
+      });
+
+      it('when request status is \'completed\'', () => {
+        const result = getUpdateRequestStatusButtonTextAndNewStatus('completed');
+        expect(result.text).to.equal('');
+        expect(result.newStatus).to.equal('');
       });
     });
   });
