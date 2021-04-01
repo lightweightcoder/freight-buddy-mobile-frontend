@@ -21,16 +21,14 @@ export default function ProfileScreen({ navigation }) {
   };
 
   return (
-    <View>
+    <View style={localStyles.container}>
       <Text style={localStyles.heading}>Profile</Text>
-      <View style={styles.container}>
-        <View style={styles.logoutButton}>
-          <Button
-            onPress={handleLogout}
-            title="Logout"
-            color="red"
-          />
-        </View>
+      <View style={localStyles.buttonContainer}>
+        <Button
+          onPress={handleLogout}
+          title="Logout"
+          color="red"
+        />
       </View>
     </View>
   );
@@ -41,5 +39,15 @@ const localStyles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
     marginVertical: 10,
+  },
+  container: {
+    backgroundColor: '#ffefcf',
+    flex: 1,
+    alignItems: 'center',
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 36,
   },
 });
