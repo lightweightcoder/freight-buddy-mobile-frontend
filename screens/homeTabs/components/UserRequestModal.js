@@ -10,7 +10,7 @@ import {
 } from '../../../store.js';
 import { getUpdateRequestStatusButtonTextAndNewStatus } from './utilities/userRequestModal.js';
 
-export default function UserRequestModal({ modalVisible, setModalVisible, navigation }) {
+export default function UserRequestModal({ modalVisible, setModalVisible }) {
   // state to inform user if a request is updating
   const [isRequestUpdating, setIsRequestUpdating] = useState(false);
 
@@ -76,8 +76,8 @@ export default function UserRequestModal({ modalVisible, setModalVisible, naviga
             setIsRequestUpdating(false);
           });
       } else {
-        // user is not logged in so navigate to login page
-        navigation.navigate('Login');
+        // remove the message saying that the request is updating as it has finished updating
+        setIsRequestUpdating(false);
       }
     });
   };

@@ -74,7 +74,6 @@ export default function RequestsScreen({ navigation }) {
       <UserRequestModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        navigation={navigation}
       />
     </ScrollView>
   );
