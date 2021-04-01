@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  View, Text, Button,
+  View, Text, Button, StyleSheet,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../../styles.js';
@@ -21,15 +21,25 @@ export default function ProfileScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Profile Screen</Text>
-      <View style={styles.logoutButton}>
-        <Button
-          onPress={handleLogout}
-          title="Logout"
-          color="red"
-        />
+    <View>
+      <Text style={localStyles.heading}>Profile</Text>
+      <View style={styles.container}>
+        <View style={styles.logoutButton}>
+          <Button
+            onPress={handleLogout}
+            title="Logout"
+            color="red"
+          />
+        </View>
       </View>
     </View>
   );
 }
+
+const localStyles = StyleSheet.create({
+  heading: {
+    fontSize: 22,
+    textAlign: 'center',
+    marginVertical: 10,
+  },
+});

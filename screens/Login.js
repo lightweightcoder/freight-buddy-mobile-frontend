@@ -92,7 +92,7 @@ export default function LoginScreen({ navigation }) {
           });
         } else {
           // if login was not successful, let user know
-          setInvalidMessage('Sorry something went wrong. Please trying logging in/registering.');
+          setInvalidMessage('Sorry something went wrong. Please try logging in/registering.');
         }
       }).catch((error) => {
         console.log('demo login error', error);

@@ -27,6 +27,7 @@ export default styles = StyleSheet.create({
 
   invalidMessage: {
     color: 'red',
+    textAlign: 'center',
   },
 
   loginButton: {
