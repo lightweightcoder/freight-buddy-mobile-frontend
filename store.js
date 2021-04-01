@@ -11,6 +11,7 @@ export const initialState = {
   requests: [],
   selectedRequest: {},
   userRequests: [],
+  userProfile: {},
 };
 
 // define each reducer action type we want to do on the data we defined above
@@ -18,6 +19,7 @@ const RETRIEVE_REQUESTS = 'RETRIEVE_REQUESTS';
 const SET_REQUEST = 'SET_REQUEST';
 const RETRIEVE_USER_REQUESTS = 'RETRIEVE_USER_REQUESTS';
 const UPDATE_ALL_FIELDS = 'UPDATE_ALL_FIELDS';
+const RETRIEVE_USER_PROFILE = 'RETRIEVE_USER_PROFILE';
 
 // define the matching reducer function
 export function appReducer(state, action) {
@@ -28,6 +30,8 @@ export function appReducer(state, action) {
       return { ...state, selectedRequest: action.payload.request };
     case RETRIEVE_USER_REQUESTS:
       return { ...state, userRequests: action.payload.userRequests };
+    case RETRIEVE_USER_PROFILE:
+      return { ...state, userProfile: action.payload.userProfile };
     case UPDATE_ALL_FIELDS:
       return {
         // eslint-disable-next-line max-len
@@ -73,6 +77,15 @@ export function updateAllFieldsAction(data) {
       userRequests: data.userRequests,
       requests: data.requestsList,
       selectedRequest: data.updatedSelectedRequest,
+    },
+  };
+}
+
+export function retrieveUserProfileAction(userProfile) {
+  return {
+    type: RETRIEVE_USER_PROFILE,
+    payload: {
+      userProfile,
     },
   };
 }
@@ -174,6 +187,24 @@ export async function createRequest(dispatch, userId, requestDetails) {
       return { error: false };
     })
     .catch((error) => {
+      console.log(error);
+      return { error: true };
+    });
+}
+
+// retrieve a user's profile
+export async function retrieveUserProfile(dispatch, userId) {
+  return axios.get(`${BACKEND_URL}/users/${userId}`)
+    .then((result) => {
+      // update the state in AppProvider with the user's profile
+      dispatch(retrieveUserProfileAction(result.data.userProfile));
+      return { error: false };
+    })
+    .catch((error) => {
+      if (error.message === 'Request failed with status code 403') {
+        console.log('forbidden error');
+        return { error: true };
+      }
       console.log(error);
       return { error: true };
     });
