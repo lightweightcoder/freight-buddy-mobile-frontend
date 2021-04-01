@@ -10,7 +10,7 @@ import {
 } from '../../../store.js';
 import { getUpdateRequestStatusButtonTextAndNewStatus } from './utilities/userRequestModal.js';
 
-export default function UserRequestModal({ modalVisible, setModalVisible }) {
+export default function UserRequestModal({ modalVisible, setModalVisible, navigation }) {
   // state to inform user if a request is updating
   const [isRequestUpdating, setIsRequestUpdating] = useState(false);
 
@@ -176,6 +176,7 @@ const localStyles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 100,
     backgroundColor: 'grey',
+    color: 'white',
   },
   textStyle: {
     color: 'white',

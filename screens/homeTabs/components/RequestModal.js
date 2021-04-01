@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useContext } from 'react';
 import {
-  View, Text, Button, Modal, Pressable, StyleSheet,
+  View, Text, Modal, Pressable, StyleSheet,
 } from 'react-native';
 import * as Linking from 'expo-linking';
 import {
@@ -91,8 +91,8 @@ const localStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
-    // backgroundColor: '#2196F3',
     backgroundColor: 'grey',
+    color: 'white',
   },
   textStyle: {
     color: 'white',

@@ -71,7 +71,11 @@ export default function RequestsScreen({ navigation }) {
       {userRequests.map((request) => (
         <UserRequestCard key={request.id} request={request} setModalVisible={setModalVisible} />
       ))}
-      <UserRequestModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      <UserRequestModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        navigation={navigation}
+      />
     </ScrollView>
   );
 }
