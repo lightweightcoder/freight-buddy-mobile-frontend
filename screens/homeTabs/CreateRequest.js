@@ -75,7 +75,7 @@ export default function CreateRequestScreen({ navigation }) {
             <TextInput
               style={localStyles.input}
               onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
+              onChangeText={(inputValue) => onChange(inputValue)}
               value={value}
             />
           )}
@@ -92,7 +92,7 @@ export default function CreateRequestScreen({ navigation }) {
             <TextInput
               style={localStyles.input}
               onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
+              onChangeText={(inputValue) => onChange(inputValue)}
               value={value}
             />
           )}
@@ -110,7 +110,7 @@ export default function CreateRequestScreen({ navigation }) {
               <Picker
                 style={localStyles.itemPicker}
                 selectedValue={value}
-                onValueChange={(itemValue) => onChange(itemValue)}
+                onValueChange={(inputValue) => onChange(inputValue)}
               >
                 {countriesNames.map((countryName) => (
                   <Picker.Item key={countryName} label={countryName} value={countryName} />
@@ -132,7 +132,7 @@ export default function CreateRequestScreen({ navigation }) {
               <Picker
                 style={localStyles.itemPicker}
                 selectedValue={value}
-                onValueChange={(itemValue) => onChange(itemValue)}
+                onValueChange={(inputValue) => onChange(inputValue)}
               >
                 {categoriesNames.map((categoryName) => (
                   <Picker.Item key={categoryName} label={categoryName} value={categoryName} />
@@ -153,7 +153,7 @@ export default function CreateRequestScreen({ navigation }) {
             <TextInput
               style={localStyles.input}
               onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
+              onChangeText={(inputValue) => onChange(inputValue)}
               value={value}
             />
           )}
@@ -170,7 +170,7 @@ export default function CreateRequestScreen({ navigation }) {
             <TextInput
               style={localStyles.input}
               onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
+              onChangeText={(inputValue) => onChange(inputValue)}
               value={value}
             />
           )}
@@ -186,7 +186,7 @@ export default function CreateRequestScreen({ navigation }) {
             <TextInput
               style={localStyles.input}
               onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
+              onChangeText={(inputValue) => onChange(inputValue)}
               value={value}
             />
           )}
