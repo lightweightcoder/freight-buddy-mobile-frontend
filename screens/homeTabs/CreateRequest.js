@@ -19,8 +19,6 @@ export default function CreateRequestScreen({ navigation }) {
 
   // when user clicks on the form submit button
   const onSubmit = (requestDetails) => {
-    console.log(requestDetails, 'formdata');
-
     // try to get user authentication data from the phone's async storage
     AsyncStorage.getItem(USER_AUTH).then((authData) => {
       // parse the data. Null if no such item
