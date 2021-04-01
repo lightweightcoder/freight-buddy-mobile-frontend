@@ -18,9 +18,13 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [invalidMessage, setInvalidMessage] = useState('');
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   // run this function when login button is clicked
   const handleLogin = () => {
+    // set logging in boolean to true to display a logging in message to user
+    setIsLoggingIn(true);
+
     // post request to axios backend
     axios.post(`${BACKEND_URL}/login`, { email, password }, { withCredentials: true })
       .then((result) => {
@@ -47,6 +51,9 @@ export default function LoginScreen({ navigation }) {
           const retrieveRequestsResult = retrieveRequests(dispatch, result.data.userCountry);
 
           retrieveRequestsResult.then((retrievedResult) => {
+            // set logging in boolean to false to remove logging in message
+            setIsLoggingIn(false);
+
             if (retrievedResult.error) {
               // if there is an error, display a message to inform user
               setInvalidMessage('sorry a database error occurred. We are currently resolving the issue.');
@@ -56,12 +63,22 @@ export default function LoginScreen({ navigation }) {
             }
           });
         }
+
+        // set logging in boolean to false to remove logging in message
+        setIsLoggingIn(false);
       }).catch((error) => {
         console.log('login error', error);
+        // if login was not successful, let user know
+        setInvalidMessage('Sorry something went wrong. Please try logging in later.');
+        // set logging in boolean to false to remove logging in message
+        setIsLoggingIn(false);
       });
   };
 
   const handleDemoLogin = () => {
+    // set logging in boolean to true to display a logging in message to user
+    setIsLoggingIn(true);
+
     // get request to axios backend to login as demo user
     axios.get(`${BACKEND_URL}/demo-login`)
       .then((result) => {
@@ -82,6 +99,9 @@ export default function LoginScreen({ navigation }) {
           const retrieveRequestsResult = retrieveRequests(dispatch, result.data.userCountry);
 
           retrieveRequestsResult.then((retrievedResult) => {
+            // set logging in boolean to false to remove logging in message
+            setIsLoggingIn(false);
+
             if (retrievedResult.error) {
               // if there is an error, display a message to inform user
               setInvalidMessage('sorry a database error occurred. We are currently resolving the issue.');
@@ -92,12 +112,19 @@ export default function LoginScreen({ navigation }) {
           });
         } else {
           // if login was not successful, let user know
-          setInvalidMessage('Sorry something went wrong. Please try logging in/registering.');
+          setInvalidMessage('Sorry something went wrong. Please try logging in.');
+          // set logging in boolean to false to remove logging in message
+          setIsLoggingIn(false);
         }
+
+        // set logging in boolean to false to remove logging in message
+        setIsLoggingIn(false);
       }).catch((error) => {
         console.log('demo login error', error);
         // if login was not successful, let user know
-        setInvalidMessage('Sorry something went wrong. Please trying logging in/registering.');
+        setInvalidMessage('Sorry something went wrong. Please trying logging in.');
+        // set logging in boolean to false to remove logging in message
+        setIsLoggingIn(false);
       });
   };
 
@@ -159,6 +186,8 @@ export default function LoginScreen({ navigation }) {
           color="grey"
         />
       </View>
+
+      <Text>{ isLoggingIn ? 'Logging in...' : '' }</Text>
     </View>
   );
 }

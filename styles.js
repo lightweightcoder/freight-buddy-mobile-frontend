@@ -37,5 +37,6 @@ export default styles = StyleSheet.create({
   demoLoginButton: {
     width: '40%',
     marginTop: 10,
+    marginBottom: 10,
   },
 });
