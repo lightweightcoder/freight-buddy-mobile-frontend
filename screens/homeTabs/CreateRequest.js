@@ -1,9 +1,8 @@
 import React, { useContext, useState } from 'react';
 import {
-  View, TextInput, Text, Button, StyleSheet, ScrollView,
+  View, TextInput, Text, Button, StyleSheet, ScrollView, Picker,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
-import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { countriesNames, categoriesNames } from './utilities/createRequest.js';
 import { createRequest, AppContext, USER_AUTH } from '../../store.js';
