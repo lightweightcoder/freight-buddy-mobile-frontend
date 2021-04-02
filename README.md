@@ -16,7 +16,7 @@ An app that allows people (requesters) to enlist the help of others (helpers) ov
 
 ## Demo Video on how to use Freight Buddy Mobile
 
-Click the gif below to view the demo of freight buddy
+Click the picture below to view the demo of freight buddy
 [![demo video](./documents/demo-video.png)](https://www.youtube.com/watch?v=KqWeAn5WWgs)
 
 ## User Stories
